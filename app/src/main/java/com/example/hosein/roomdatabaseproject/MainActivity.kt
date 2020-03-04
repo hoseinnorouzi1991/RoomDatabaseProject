@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         db = AppDatabase.getInstance(this)
 
+        listeners()
 
     }
 
@@ -42,14 +43,14 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        test.setOnClickListener {
+        test2?.setOnClickListener {
             val users = db.users().getAll()
             val builder: StringBuilder = StringBuilder()
             for (user in users) {
                 builder.append(user.displayName)
                 builder.append("\n")
             }
-            test.text = builder.toString()
+            test2.text = builder.toString()
         }
     }
 
@@ -66,6 +67,9 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == pickRequest && resultCode == Activity.RESULT_OK) {
 
             val uImage = data!!.data!!
+            val saveImage = SaveImage.saveImage(this,uImage)
+
+            addUser("mohammad hosein norouzi",null,"09398299779",saveImage)
 //            addUser("mohammmad hosein norouzi",null,"09398299779",newImageName)
         }
     }
